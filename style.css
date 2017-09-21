@@ -1,0 +1,60 @@
+body {
+  width: 100%;
+  margin: 0 auto;
+}
+
+img {
+  width: 100%;
+}
+
+.siema {
+  margin: 0rem 0;
+  position: relative;
+}
+
+.siema > div .flex {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.siema > div .flex > div {
+  width: 100vw;
+  height: calc(100vh - 150px);
+  background-position: center !important;
+  background-size: cover !important;
+}
+
+.siema > div .flex p {
+  width: 100vw;
+  padding: 10px 30px 0px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.siema .pagination {
+  position: absolute;
+  bottom: 15px;
+  text-align: center;
+  z-index: 10;
+  width: 100%;
+}
+
+.siema .pagination button {
+  display: inline-block;
+  margin: 3px;
+  width: 14px;
+  height: 14px;
+  border: none;
+  background: #CECECE;
+  border-radius: 50%;
+  outline: none !important;
+  cursor: pointer;
+}
+
+.siema .pagination button.act {
+  background: #7726d9;
+}

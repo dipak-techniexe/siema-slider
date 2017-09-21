@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Pure JavaScript slider with animations</title>
+  <title></title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="siema">
+    <div class="flex">
+      <div style="background:url(https://source.unsplash.com/TY_cMZgN3l8/600x400) no-repeat"> </div>
+      <p> Sunt dignissimos distinctio, veniam, tenetur aspernatur nulla! </p>
+    </div>
+    <div class="flex">
+      <div style="background:url(https://source.unsplash.com/IBEXUZBmlXg/600x400) no-repeat"> </div>
+      <p> Sunt dignissimos distinctio, veniam, tenetur aspernatur nulla! </p>
+    </div>
+    <div class="flex">
+      <div style="background:url(https://source.unsplash.com/Ori_JWlqVpc/600x400) no-repeat"> </div>
+      <p> Sunt dignissimos distinctio, veniam, tenetur aspernatur nulla! </p>
+    </div>
+    <div class="flex">
+      <div style="background:url(https://source.unsplash.com/gr7ZkoZnHXU/600x400) no-repeat"> </div>
+      <p> Sunt dignissimos distinctio, veniam, tenetur aspernatur nulla! </p>
+    </div>
+  </div>
+  <script src="slider.js"></script>
+  <script>
+    // Siema doesn't come with pagination built in
+    // But it is very easy to add one if you want
+
+    // New siema instance
+    const mySiema = new Siema({
+      selector: '.siema',
+      duration: 500,
+      easing: 'ease-out',
+      perPage: 1,
+      startIndex: 0,
+      draggable: true,
+      threshold: 20,
+      loop: false,
+      onInit: () => {
+
+      },
+      onChange: () => {
+        clearInterval(Interval);
+        Interval = setInterval(() => mySiema.next(), 4000);
+        let btn = document.getElementsByTagName('button'), btnL = btn.length;
+        for (i = 0; i <= btnL; i++) {
+          btn[i] !== undefined && btn[i].className == "act" ? btn[i].className = "noact" : null;
+        }
+        btn[mySiema.currentSlide] !== undefined ? btn[mySiema.currentSlide].className = "act" : null;
+      },
+    });
+    var Interval = setInterval(() => mySiema.next(), 4000)
+
+    // Add a function that generates pagination to prototype
+    Siema.prototype.addPagination = function () {
+      const pagiCont = document.createElement('div');
+      for (let i = 0; i < this.innerElements.length; i++) {
+        const btn = document.createElement('button');
+        i == 0 ? btn.className = 'act' : btn.className = 'noact';
+        btn.addEventListener('click', () => this.goTo(i));
+        pagiCont.appendChild(btn);
+      }
+      pagiCont.className = "pagination";
+      this.selector.appendChild(pagiCont);
+    }
+
+    // Trigger pagination creator
+    mySiema.addPagination();
+  </script>
+</body>
+
+</html>
